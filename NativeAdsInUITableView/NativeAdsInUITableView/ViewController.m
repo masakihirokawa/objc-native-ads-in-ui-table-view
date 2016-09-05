@@ -113,16 +113,22 @@ BOOL       const SHOW_NATIVE_ADS = YES; // ネイティブ広告を表示する�
     
     // TODO: ネイティブ広告を表示した分だけインデックス値に誤差が生じるため、通常はこの値を使用して処理を行う
     NSUInteger const corretedIndexId = [self correctedIndexId:index];
-    NSLog(@"%lu", corretedIndexId);
     
     // ネイティブ広告を表示する位置であるか取得し、タップ時の処理を分ける
     BOOL const isNativeAdsPosition = [self showNativeAdsByIndexId:index];
     if (isNativeAdsPosition) {
         // TODO: ネイティブ広告セルの場合の処理
         
+        // ネイティブ広告の背景はタップ禁止のため、セルの選択を解除する必要がある
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        
+        // デバッグ出力
+        NSLog(@"NativeAds");
     } else {
         // TODO: 通常セルの場合の処理
         
+        // デバッグ出力
+        NSLog(@"corretedIndexId: %lu", corretedIndexId);
     }
 }
 
